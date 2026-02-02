@@ -1,5 +1,5 @@
 name: Build APK
-on: [push, pull_request]
+on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,13 +11,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew || true
       - name: Build with Gradle
-        run: ./gradlew assembleDebug
+        run: bash gradlew assembleDebug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: BDM-Downloader-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: BDM-Downloader
+          path: app/build/outputs/apk/debug/*.apk
           
