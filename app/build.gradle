@@ -6,23 +6,29 @@ plugins {
 android {
     namespace 'com.bdm.downloader'
     compileSdk 34
-    
+
     defaultConfig {
         applicationId "com.bdm.downloader"
-        minSdk 21
+        minSdk 24 //
         targetSdk 34
         versionCode 1
         versionName "1.0"
-        
-        vectorDrawables.useSupportLibrary = true
     }
-    
+
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled false //
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
     
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
