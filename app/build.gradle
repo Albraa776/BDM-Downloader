@@ -13,7 +13,6 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
-        
         multiDexEnabled true
     }
 
@@ -32,17 +31,16 @@ android {
         jvmTarget = '17'
     }
 
-    // هذا الجزء تم تعديله بأقوى صيغة برمجية لتنظيف التكرار
-    packaging {
+    // تعديل طريقة كتابة استثناءات الملفات لتناسب النسخة 8.2
+    packagingOptions {
         resources {
-            // تجاهل أي ملف مكرر مهما كان نوعه داخل مجلد META-INF
-            excludes += "META-INF/**"
-            excludes += "**/LICENSE.txt"
-            excludes += "**/NOTICE.txt"
-            excludes += "/*.kotlin_module"
-            
-            // دمج الملفات التي لا يمكن حذفها
-            mergeServiceFiles()
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            excludes += 'META-INF/DEPENDENCIES'
+            excludes += 'META-INF/LICENSE'
+            excludes += 'META-INF/NOTICE'
+            excludes += 'META-INF/*.kotlin_module'
+            excludes += '**/LICENSE.txt'
+            excludes += '**/NOTICE.txt'
         }
     }
 }
