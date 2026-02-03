@@ -19,7 +19,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -32,23 +31,12 @@ android {
         jvmTarget = '17'
     }
 
-    // هذه الكتلة تم تعديلها لتشمل كل الملفات المسببة للنزاع في سجلاتك الأخيرة
+    // هذه هي القوة الضاربة لحل مشكلة التكرار نهائياً
     packaging {
         resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-            excludes += 'META-INF/DEPENDENCIES'
-            excludes += 'META-INF/LICENSE'
-            excludes += 'META-INF/LICENSE.txt'
-            excludes += 'META-INF/license.txt'
-            excludes += 'META-INF/NOTICE'
-            excludes += 'META-INF/NOTICE.txt'
-            excludes += 'META-INF/notice.txt'
-            excludes += 'META-INF/ASL2.0'
-            excludes += 'META-INF/*.kotlin_module'
-            excludes += 'META-INF/com.android.tools/proguard/coroutines.pro'
-            
-            pickFirsts += 'META-INF/LICENSE.md'
-            pickFirsts += 'META-INF/NOTICE.md'
+            // أمر شامل لتجاهل أي ملف يسبب نزاعاً في المكتبات
+            excludes += "/META-INF/**"
+            excludes += "/*.kotlin_module"
         }
     }
 }
