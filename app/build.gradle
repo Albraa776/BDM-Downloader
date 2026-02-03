@@ -13,6 +13,7 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
+        
         multiDexEnabled true
     }
 
@@ -31,12 +32,17 @@ android {
         jvmTarget = '17'
     }
 
-    // هذه هي القوة الضاربة لحل مشكلة التكرار نهائياً
+    // هذا الجزء تم تعديله بأقوى صيغة برمجية لتنظيف التكرار
     packaging {
         resources {
-            // أمر شامل لتجاهل أي ملف يسبب نزاعاً في المكتبات
-            excludes += "/META-INF/**"
+            // تجاهل أي ملف مكرر مهما كان نوعه داخل مجلد META-INF
+            excludes += "META-INF/**"
+            excludes += "**/LICENSE.txt"
+            excludes += "**/NOTICE.txt"
             excludes += "/*.kotlin_module"
+            
+            // دمج الملفات التي لا يمكن حذفها
+            mergeServiceFiles()
         }
     }
 }
