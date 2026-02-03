@@ -2,7 +2,7 @@ name: Build APK
 on: [push, workflow_dispatch]
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: set up JDK 17
@@ -10,12 +10,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
       - name: Build with Gradle
-        run: bash gradlew assembleDebug
+        run: gradle assembleDebug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: BDM-Downloader
           path: app/build/outputs/apk/debug/*.apk
-          
