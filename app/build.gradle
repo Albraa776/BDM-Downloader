@@ -19,6 +19,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -31,18 +32,24 @@ android {
         jvmTarget = '17'
     }
 
-    // هذه هي "الضربة القاضية" للأخطاء التي تظهر في سجلاتك
-    packagingOptions {
+    // هذه الكتلة هي التي ستحل المشكلة الظاهرة في صورتك الأخيرة 
+    packaging {
         resources {
-            pickFirsts += 'META-INF/AL2.0'
-            pickFirsts += 'META-INF/LGPL2.1'
-            pickFirsts += 'META-INF/LICENSE.md'
-            pickFirsts += 'META-INF/NOTICE.md'
-            
+            // تجاهل ملفات الميتا التي تسبب النزاع
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
             excludes += 'META-INF/DEPENDENCIES'
             excludes += 'META-INF/LICENSE'
+            excludes += 'META-INF/LICENSE.txt'
+            excludes += 'META-INF/license.txt'
             excludes += 'META-INF/NOTICE'
+            excludes += 'META-INF/NOTICE.txt'
+            excludes += 'META-INF/notice.txt'
+            excludes += 'META-INF/ASL2.0'
             excludes += 'META-INF/*.kotlin_module'
+            
+            // اختيار النسخة الأولى عند وجود تكرار
+            pickFirsts += 'META-INF/LICENSE.md'
+            pickFirsts += 'META-INF/NOTICE.md'
         }
     }
 }
@@ -52,4 +59,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
