@@ -31,24 +31,26 @@ android {
         jvmTarget = '17'
     }
 
-    // تعديل طريقة كتابة استثناءات الملفات لتناسب النسخة 8.2
+    // الحل الجذري: سياسة التجاهل التام لأي ملفات مكررة
     packagingOptions {
         resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-            excludes += 'META-INF/DEPENDENCIES'
-            excludes += 'META-INF/LICENSE'
-            excludes += 'META-INF/NOTICE'
-            excludes += 'META-INF/*.kotlin_module'
-            excludes += '**/LICENSE.txt'
-            excludes += '**/NOTICE.txt'
+            // تجاهل شامل لكل ما هو مكرر أو مسبب للمشاكل
+            excludes += "META-INF/**"
+            excludes += "**/LICENSE*"
+            excludes += "**/NOTICE*"
+            excludes += "/*.kotlin_module"
+            
+            // اختيار النسخة الأولى دائماً في حال وجود أي تعارض آخر
+            pickFirsts += "**/*"
         }
     }
 }
 
 dependencies {
+    // مكتبات الحد الأدنى لضمان البناء السريع والناجح
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.multidex:multidex:2.1.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
