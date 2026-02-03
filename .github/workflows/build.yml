@@ -19,3 +19,4 @@ jobs:
         with:
           name: BDM-Downloader
           path: app/build/outputs/apk/debug/*.apk
+          
