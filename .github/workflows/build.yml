@@ -10,8 +10,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      # هذه الخطوة هي التي ستحل مشكلة النسخة 9.3 نهائياً
+          
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
@@ -24,4 +23,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: BDM-Downloader
-          path: "**/build/outputs/apk/debug/*.apk"
+          path: "app/build/outputs/apk/debug/*.apk"
