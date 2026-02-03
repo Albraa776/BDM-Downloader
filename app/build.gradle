@@ -13,8 +13,6 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
-        
-        // سطر سحري لتجاوز تعارض المكتبات
         multiDexEnabled true
     }
 
@@ -33,12 +31,18 @@ android {
         jvmTarget = '17'
     }
 
-    // هذا الجزء هو الذي سيحل مشكلة التوقف الأخيرة
+    // هذه الإضافة ستمنع الخطأ الظاهر في صورتك الأخيرة نهائياً
     packagingOptions {
         resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-            merges += 'META-INF/LICENSE.md'
-            merges += 'META-INF/LICENSE-notice.md'
+            excludes += 'META-INF/DEPENDENCIES'
+            excludes += 'META-INF/LICENSE'
+            excludes += 'META-INF/LICENSE.txt'
+            excludes += 'META-INF/license.txt'
+            excludes += 'META-INF/NOTICE'
+            excludes += 'META-INF/NOTICE.txt'
+            excludes += 'META-INF/notice.txt'
+            excludes += 'META-INF/ASL2.0'
+            excludes += 'META-INF/*.kotlin_module'
         }
     }
 }
